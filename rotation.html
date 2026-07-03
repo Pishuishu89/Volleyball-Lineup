@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chriandesh — rotation order</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap');
+
+  :root{
+    --court: #0f3d3a;
+    --court-line: rgba(255,255,255,0.5);
+    --sand: #f3ede1;
+    --ink: #16211f;
+    --ink-soft: #5a655f;
+    --amber: #e8a33d;
+    --amber-ink: #4a2f05;
+    --setter: #3d7ea6;
+    --setter-ink: #eaf4fb;
+    --gold: #7a5cc0;
+    --gold-ink: #f2eefc;
+    --fresh: #6fa96a;
+    --fresh-ink: #0f2a0c;
+    --eden: #c1546a;
+    --eden-ink: #fdeef1;
+    --paper: #ffffff;
+    --line: rgba(22,33,31,0.12);
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background: var(--sand);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, sans-serif;
+    display:flex;
+    justify-content:center;
+    padding: 40px 16px 64px;
+    min-height:100vh;
+  }
+  .wrap{ width:100%; max-width: 720px; }
+
+  .masthead{ margin-bottom: 28px; }
+  .eyebrow{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:500;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0 0 6px;
+  }
+  h1{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size: 30px;
+    line-height:1.15;
+    margin:0 0 10px;
+    letter-spacing: -0.01em;
+  }
+  .sub{ font-size:15px; color:var(--ink-soft); line-height:1.55; max-width: 54ch; margin:0; }
+  .sub b{ color:var(--ink); font-weight:600; }
+
+  .panel{
+    background: var(--paper);
+    border-radius: 20px;
+    border: 1px solid var(--line);
+    padding: 28px;
+    margin-top: 26px;
+    box-shadow: 0 1px 2px rgba(22,33,31,0.04);
+  }
+
+  .rot-nav{
+    display:flex; align-items:center; justify-content:space-between;
+    margin-bottom: 22px;
+  }
+  .rot-nav .count{
+    font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:15px;
+  }
+  .rot-nav .count span{ color: var(--ink-soft); font-weight:500; }
+  .nav-btns{ display:flex; gap:8px; }
+  .nav-btns button{
+    width:38px; height:38px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 16px;
+    cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    transition: background 0.15s, transform 0.1s;
+  }
+  .nav-btns button:hover{ background: var(--sand); }
+  .nav-btns button:active{ transform: scale(0.94); }
+
+  .dots{ display:flex; gap:6px; justify-content:center; margin: 4px 0 22px; }
+  .dot{ width:7px; height:7px; border-radius:50%; background: var(--line); transition: background 0.2s, transform 0.2s; }
+  .dot.active{ background: var(--amber); transform: scale(1.25); }
+
+  .court-frame{
+    background: var(--court);
+    border-radius: 14px;
+    padding: 22px 18px 16px;
+    position: relative;
+  }
+  .net{
+    height: 10px;
+    background-image: repeating-linear-gradient(90deg, var(--court-line) 0 6px, transparent 6px 12px);
+    border-top: 2px solid var(--court-line);
+    border-bottom: 2px solid var(--court-line);
+    margin-bottom: 14px;
+  }
+  .net-label{
+    position:absolute; top: 2px; left: 18px;
+    font-size: 10px; letter-spacing:0.1em; text-transform:uppercase;
+    color: rgba(255,255,255,0.55);
+  }
+  .rows{
+    display:grid;
+    grid-template-rows: 1fr 1fr;
+    gap: 10px;
+  }
+  .row{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  .cell{
+    position:relative;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 10px;
+    padding: 14px 8px 12px;
+    min-height: 78px;
+    display:flex; flex-direction:column; justify-content:center; align-items:center;
+    text-align:center;
+    color: #eef5f2;
+  }
+  .cell .name{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size: 17px;
+    line-height:1.1;
+  }
+  .cell .badge{
+    display:inline-block;
+    margin-top: 6px;
+    font-size: 10px;
+    font-weight:600;
+    letter-spacing:0.03em;
+    padding: 2px 7px;
+    border-radius: 999px;
+    width: fit-content;
+  }
+  .cell.setter{ background: rgba(61,126,166,0.28); border-color: rgba(61,126,166,0.55); }
+  .cell.setter .badge.role{ background: var(--setter); color: var(--setter-ink); }
+  .cell.primary-setter{ border-color: var(--gold); border-width: 2px; }
+  .cell .badge.primary{ background: var(--gold); color: var(--gold-ink); }
+  .cell.server{ background: rgba(232,163,61,0.22); border-color: var(--amber); }
+  .cell.server .badge.serve{ background: var(--amber); color: var(--amber-ink); }
+  .cell.fresh .badge.fresh{ background: var(--fresh); color: var(--fresh-ink); }
+  .cell.eden-here .badge.eden{ background: var(--eden); color: var(--eden-ink); }
+
+  .bench-row{
+    display:flex; gap: 10px; margin-top: 14px;
+  }
+  .bench-slot{
+    flex:1;
+    border: 1px dashed rgba(255,255,255,0.28);
+    border-radius: 10px;
+    padding: 10px;
+    text-align:center;
+    color: rgba(255,255,255,0.85);
+  }
+  .bench-slot .tag{ font-size:10px; color: rgba(255,255,255,0.5); letter-spacing:0.04em; display:block; margin-bottom:3px;}
+  .bench-slot .name{ font-family:'Space Grotesk', sans-serif; font-weight:600; font-size:14px; }
+
+  .legend{
+    display:flex; flex-wrap:wrap; gap: 14px 20px;
+    margin-top: 20px; padding-top: 18px;
+    border-top: 1px solid var(--line);
+    font-size: 12.5px; color: var(--ink-soft);
+  }
+  .legend .item{ display:flex; align-items:center; gap: 7px; }
+  .legend .swatch{ width:10px; height:10px; border-radius:3px; }
+
+  @media (max-width: 480px){
+    .panel{ padding: 18px; }
+    .cell{ min-height:70px; padding:10px 6px; }
+    .cell .name{ font-size:15px; }
+    h1{ font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="masthead">
+    <p class="eyebrow">Chriandesh</p>
+    <h1>Rotation order</h1>
+    <p class="sub">Every server subs out and re-enters at middle back &mdash; except <b>Eden</b>, who never comes off. The three setters are staggered so a setter is in the front row on every rotation.</p>
+  </div>
+
+  <div class="panel">
+    <div class="rot-nav">
+      <div class="count">Rotation <span id="rotNum">1</span><span> / 18</span></div>
+      <div class="nav-btns">
+        <button id="prevBtn" aria-label="Previous rotation">&#8592;</button>
+        <button id="nextBtn" aria-label="Next rotation">&#8594;</button>
+      </div>
+    </div>
+    <div class="dots" id="dots"></div>
+
+    <div class="court-frame">
+      <span class="net-label">Net</span>
+      <div class="net"></div>
+      <div class="rows">
+        <div class="row" id="frontRow"></div>
+        <div class="row" id="backRow"></div>
+      </div>
+      <div class="bench-row" id="benchRow"></div>
+    </div>
+
+    <div class="legend">
+      <div class="item"><span class="swatch" style="background:var(--setter)"></span>Setter</div>
+      <div class="item"><span class="swatch" style="background:var(--gold)"></span>Setting this rotation (priority: Eden &gt; Ishu &gt; Ali)</div>
+      <div class="item"><span class="swatch" style="background:var(--amber)"></span>Currently serving</div>
+      <div class="item"><span class="swatch" style="background:var(--fresh)"></span>Fresh sub at middle back</div>
+      <div class="item"><span class="swatch" style="background:var(--eden)"></span>Eden (never subs off)</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const rotations = [
+    { P4:'Haoyi',   P3:'Eden',    P2:'Ali',     P5:'Alan',    P6:'Ishu',    P1:'Shadman', bench:['Artin','Jason'] },
+    { P4:'Alan',    P3:'Haoyi',   P2:'Eden',    P5:'Ishu',    P6:'Artin',   P1:'Ali',     bench:['Jason','Shadman'] },
+    { P4:'Ishu',    P3:'Alan',    P2:'Haoyi',   P5:'Artin',   P6:'Jason',   P1:'Eden',    bench:['Shadman','Ali'] },
+    { P4:'Artin',   P3:'Ishu',    P2:'Alan',    P5:'Jason',   P6:'Eden',    P1:'Haoyi',   bench:['Shadman','Ali'] },
+    { P4:'Jason',   P3:'Artin',   P2:'Ishu',    P5:'Eden',    P6:'Shadman', P1:'Alan',    bench:['Ali','Haoyi'] },
+    { P4:'Eden',    P3:'Jason',   P2:'Artin',   P5:'Shadman', P6:'Ali',     P1:'Ishu',    bench:['Haoyi','Alan'] },
+    { P4:'Shadman', P3:'Eden',    P2:'Jason',   P5:'Ali',     P6:'Haoyi',   P1:'Artin',   bench:['Alan','Ishu'] },
+    { P4:'Ali',     P3:'Shadman', P2:'Eden',    P5:'Haoyi',   P6:'Alan',    P1:'Jason',   bench:['Ishu','Artin'] },
+    { P4:'Haoyi',   P3:'Ali',     P2:'Shadman', P5:'Alan',    P6:'Ishu',    P1:'Eden',    bench:['Artin','Jason'] },
+    { P4:'Alan',    P3:'Haoyi',   P2:'Ali',     P5:'Ishu',    P6:'Eden',    P1:'Shadman', bench:['Artin','Jason'] },
+    { P4:'Ishu',    P3:'Alan',    P2:'Haoyi',   P5:'Eden',    P6:'Artin',   P1:'Ali',     bench:['Jason','Shadman'] },
+    { P4:'Eden',    P3:'Ishu',    P2:'Alan',    P5:'Artin',   P6:'Jason',   P1:'Haoyi',   bench:['Shadman','Ali'] },
+    { P4:'Artin',   P3:'Eden',    P2:'Ishu',    P5:'Jason',   P6:'Shadman', P1:'Alan',    bench:['Ali','Haoyi'] },
+    { P4:'Jason',   P3:'Artin',   P2:'Eden',    P5:'Shadman', P6:'Ali',     P1:'Ishu',    bench:['Haoyi','Alan'] },
+    { P4:'Shadman', P3:'Jason',   P2:'Artin',   P5:'Ali',     P6:'Haoyi',   P1:'Eden',    bench:['Alan','Ishu'] },
+    { P4:'Ali',     P3:'Shadman', P2:'Jason',   P5:'Haoyi',   P6:'Eden',    P1:'Artin',   bench:['Alan','Ishu'] },
+    { P4:'Haoyi',   P3:'Ali',     P2:'Shadman', P5:'Eden',    P6:'Alan',    P1:'Jason',   bench:['Ishu','Artin'] },
+    { P4:'Eden',    P3:'Haoyi',   P2:'Ali',     P5:'Alan',    P6:'Ishu',    P1:'Shadman', bench:['Artin','Jason'] },
+  ];
+
+  const setters = new Set(['Ishu','Ali','Eden']);
+  const setterPriority = ['Eden','Ishu','Ali'];
+
+  let idx = 0;
+  const rotNum = document.getElementById('rotNum');
+  const dotsEl = document.getElementById('dots');
+  const frontRow = document.getElementById('frontRow');
+  const backRow = document.getElementById('backRow');
+  const benchRow = document.getElementById('benchRow');
+
+  for(let i=0;i<rotations.length;i++){
+    const d = document.createElement('div');
+    d.className = 'dot';
+    dotsEl.appendChild(d);
+  }
+
+  function cellHTML(key, name, primarySetter){
+    const isSetter = setters.has(name);
+    const isServer = key === 'P1';
+    const isMidBack = key === 'P6';
+    const isEdenHere = name === 'Eden';
+    const isPrimary = name === primarySetter;
+    let cls = 'cell';
+    if(isSetter) cls += ' setter';
+    if(isServer) cls += ' server';
+    if(isMidBack && !isEdenHere) cls += ' fresh';
+    if(isEdenHere) cls += ' eden-here';
+    if(isPrimary) cls += ' primary-setter';
+
+    let badges = '';
+    if(isPrimary) badges += '<span class="badge primary">setting</span>';
+    else if(isSetter) badges += '<span class="badge role">setter</span>';
+    if(isServer) badges += '<span class="badge serve">serving</span>';
+    if(isMidBack && !isEdenHere) badges += '<span class="badge fresh">fresh sub</span>';
+    if(isEdenHere) badges += '<span class="badge eden">never subs</span>';
+
+    return '<div class="'+cls+'"><div class="name">'+name+'</div>'+badges+'</div>';
+  }
+
+  function render(){
+    const r = rotations[idx];
+    const frontNames = [r.P4, r.P3, r.P2];
+    const frontSetters = frontNames.filter(n => setters.has(n));
+    const primarySetter = setterPriority.find(n => frontSetters.includes(n)) || null;
+
+    frontRow.innerHTML = cellHTML('P4', r.P4, primarySetter) + cellHTML('P3', r.P3, primarySetter) + cellHTML('P2', r.P2, primarySetter);
+    backRow.innerHTML = cellHTML('P5', r.P5, primarySetter) + cellHTML('P6', r.P6, primarySetter) + cellHTML('P1', r.P1, primarySetter);
+    benchRow.innerHTML =
+      '<div class="bench-slot"><span class="tag">next up</span><span class="name">'+r.bench[0]+'</span></div>'+
+      '<div class="bench-slot"><span class="tag">bench</span><span class="name">'+r.bench[1]+'</span></div>';
+    rotNum.textContent = idx+1;
+    [...dotsEl.children].forEach((d,i)=> d.classList.toggle('active', i===idx));
+  }
+
+  document.getElementById('prevBtn').addEventListener('click', ()=>{ idx = (idx - 1 + rotations.length) % rotations.length; render(); });
+  document.getElementById('nextBtn').addEventListener('click', ()=>{ idx = (idx + 1) % rotations.length; render(); });
+
+  render();
+</script>
+</body>
+</html>
