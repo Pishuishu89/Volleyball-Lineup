@@ -198,7 +198,7 @@
   <div class="masthead">
     <p class="eyebrow">Chriandesh</p>
     <h1>Rotation order</h1>
-    <p class="sub">Every server subs out and re-enters at middle back &mdash; except <b>Eden</b>, who never comes off. The three setters are staggered so a setter is in the front row on every rotation.</p>
+    <p class="sub">Every server subs out and re-enters at middle back &mdash; except <b>Eden</b>, who never comes off. The three setters (Ishu, Farbod, Ali) are staggered to keep a setter in the front row on most rotations.</p>
   </div>
 
   <div class="panel">
@@ -223,7 +223,7 @@
 
     <div class="legend">
       <div class="item"><span class="swatch" style="background:var(--setter)"></span>Setter</div>
-      <div class="item"><span class="swatch" style="background:var(--gold)"></span>Setting this rotation (priority: Eden &gt; Ishu &gt; Farbod)</div>
+      <div class="item"><span class="swatch" style="background:var(--gold)"></span>Setting this rotation (priority: Ishu &gt; Farbod &gt; Ali)</div>
       <div class="item"><span class="swatch" style="background:var(--amber)"></span>Currently serving</div>
       <div class="item"><span class="swatch" style="background:var(--fresh)"></span>Fresh sub at middle back</div>
       <div class="item"><span class="swatch" style="background:var(--eden)"></span>Eden (never subs off)</div>
@@ -234,35 +234,35 @@
 
 <script>
   const rotations = [
-    { P4:'Haoyi',   P3:'Eden',    P2:'Farbod',     P5:'Ali',    P6:'Ishu',    P1:'Shadman', bench:['Artin','Alan'] },
-    { P4:'Ali',    P3:'Haoyi',   P2:'Eden',    P5:'Ishu',    P6:'Artin',   P1:'Farbod',     bench:['Alan','Shadman'] },
-    { P4:'Ishu',    P3:'Ali',    P2:'Haoyi',   P5:'Artin',   P6:'Alan',   P1:'Eden',    bench:['Shadman','Farbod'] },
-    { P4:'Artin',   P3:'Ishu',    P2:'Ali',    P5:'Alan',   P6:'Eden',    P1:'Haoyi',   bench:['Shadman','Farbod'] },
-    { P4:'Alan',   P3:'Artin',   P2:'Ishu',    P5:'Eden',    P6:'Shadman', P1:'Ali',    bench:['Farbod','Haoyi'] },
-    { P4:'Eden',    P3:'Alan',   P2:'Artin',   P5:'Shadman', P6:'Farbod',     P1:'Ishu',    bench:['Haoyi','Ali'] },
-    { P4:'Shadman', P3:'Eden',    P2:'Alan',   P5:'Farbod',     P6:'Haoyi',   P1:'Artin',   bench:['Ali','Ishu'] },
-    { P4:'Farbod',     P3:'Shadman', P2:'Eden',    P5:'Haoyi',   P6:'Ali',    P1:'Alan',   bench:['Ishu','Artin'] },
-    { P4:'Haoyi',   P3:'Farbod',     P2:'Shadman', P5:'Ali',    P6:'Ishu',    P1:'Eden',    bench:['Artin','Alan'] },
-    { P4:'Ali',    P3:'Haoyi',   P2:'Farbod',     P5:'Ishu',    P6:'Eden',    P1:'Shadman', bench:['Artin','Alan'] },
-    { P4:'Ishu',    P3:'Ali',    P2:'Haoyi',   P5:'Eden',    P6:'Artin',   P1:'Farbod',     bench:['Alan','Shadman'] },
-    { P4:'Eden',    P3:'Ishu',    P2:'Ali',    P5:'Artin',   P6:'Alan',   P1:'Haoyi',   bench:['Shadman','Farbod'] },
-    { P4:'Artin',   P3:'Eden',    P2:'Ishu',    P5:'Alan',   P6:'Shadman', P1:'Ali',    bench:['Farbod','Haoyi'] },
-    { P4:'Alan',   P3:'Artin',   P2:'Eden',    P5:'Shadman', P6:'Farbod',     P1:'Ishu',    bench:['Haoyi','Ali'] },
-    { P4:'Shadman', P3:'Alan',   P2:'Artin',   P5:'Farbod',     P6:'Haoyi',   P1:'Eden',    bench:['Ali','Ishu'] },
-    { P4:'Farbod',     P3:'Shadman', P2:'Alan',   P5:'Haoyi',   P6:'Eden',    P1:'Artin',   bench:['Ali','Ishu'] },
-    { P4:'Haoyi',   P3:'Farbod',     P2:'Shadman', P5:'Eden',    P6:'Ali',    P1:'Alan',   bench:['Ishu','Artin'] },
-    { P4:'Eden',    P3:'Haoyi',   P2:'Farbod',     P5:'Ali',    P6:'Ishu',    P1:'Shadman', bench:['Artin','Alan'] },
-    { P4:'Ali',    P3:'Eden',    P2:'Haoyi',   P5:'Ishu',    P6:'Artin',   P1:'Farbod',     bench:['Alan','Shadman'] },
-    { P4:'Ishu',    P3:'Ali',    P2:'Eden',    P5:'Artin',   P6:'Alan',   P1:'Haoyi',   bench:['Shadman','Farbod'] },
-    { P4:'Artin',   P3:'Ishu',    P2:'Ali',    P5:'Alan',   P6:'Shadman', P1:'Eden',    bench:['Farbod','Haoyi'] },
-    { P4:'Alan',   P3:'Artin',   P2:'Ishu',    P5:'Shadman', P6:'Eden',    P1:'Ali',    bench:['Farbod','Haoyi'] },
-    { P4:'Shadman', P3:'Alan',   P2:'Artin',   P5:'Eden',    P6:'Farbod',     P1:'Ishu',    bench:['Haoyi','Ali'] },
-    { P4:'Eden',    P3:'Shadman', P2:'Alan',   P5:'Farbod',     P6:'Haoyi',   P1:'Artin',   bench:['Ali','Ishu'] },
-    { P4:'Farbod',     P3:'Eden',    P2:'Shadman', P5:'Haoyi',   P6:'Ali',    P1:'Alan',   bench:['Ishu','Artin'] },
+    { P4:'Ishu',    P3:'Haoyi',   P2:'Shadman', P5:'Artin',   P6:'Farbod',  P1:'Eden',    bench:['Alan','Ali'] },
+    { P4:'Artin',   P3:'Ishu',    P2:'Haoyi',   P5:'Farbod',  P6:'Eden',    P1:'Shadman', bench:['Alan','Ali'] },
+    { P4:'Farbod',  P3:'Artin',   P2:'Ishu',    P5:'Eden',    P6:'Alan',    P1:'Haoyi',   bench:['Ali','Shadman'] },
+    { P4:'Eden',    P3:'Farbod',  P2:'Artin',   P5:'Alan',    P6:'Ali',     P1:'Ishu',    bench:['Shadman','Haoyi'] },
+    { P4:'Alan',    P3:'Eden',    P2:'Farbod',  P5:'Ali',     P6:'Shadman', P1:'Artin',   bench:['Haoyi','Ishu'] },
+    { P4:'Ali',     P3:'Alan',    P2:'Eden',    P5:'Shadman', P6:'Haoyi',   P1:'Farbod',  bench:['Ishu','Artin'] },
+    { P4:'Shadman', P3:'Ali',     P2:'Alan',    P5:'Haoyi',   P6:'Ishu',    P1:'Eden',    bench:['Artin','Farbod'] },
+    { P4:'Haoyi',   P3:'Shadman', P2:'Ali',     P5:'Ishu',    P6:'Eden',    P1:'Alan',    bench:['Artin','Farbod'] },
+    { P4:'Ishu',    P3:'Haoyi',   P2:'Shadman', P5:'Eden',    P6:'Artin',   P1:'Ali',     bench:['Farbod','Alan'] },
+    { P4:'Eden',    P3:'Ishu',    P2:'Haoyi',   P5:'Artin',   P6:'Farbod',  P1:'Shadman', bench:['Alan','Ali'] },
+    { P4:'Artin',   P3:'Eden',    P2:'Ishu',    P5:'Farbod',  P6:'Alan',    P1:'Haoyi',   bench:['Ali','Shadman'] },
+    { P4:'Farbod',  P3:'Artin',   P2:'Eden',    P5:'Alan',    P6:'Ali',     P1:'Ishu',    bench:['Shadman','Haoyi'] },
+    { P4:'Alan',    P3:'Farbod',  P2:'Artin',   P5:'Ali',     P6:'Shadman', P1:'Eden',    bench:['Haoyi','Ishu'] },
+    { P4:'Ali',     P3:'Alan',    P2:'Farbod',  P5:'Shadman', P6:'Eden',    P1:'Artin',   bench:['Haoyi','Ishu'] },
+    { P4:'Shadman', P3:'Ali',     P2:'Alan',    P5:'Eden',    P6:'Haoyi',   P1:'Farbod',  bench:['Ishu','Artin'] },
+    { P4:'Eden',    P3:'Shadman', P2:'Ali',     P5:'Haoyi',   P6:'Ishu',    P1:'Alan',    bench:['Artin','Farbod'] },
+    { P4:'Haoyi',   P3:'Eden',    P2:'Shadman', P5:'Ishu',    P6:'Artin',   P1:'Ali',     bench:['Farbod','Alan'] },
+    { P4:'Ishu',    P3:'Haoyi',   P2:'Eden',    P5:'Artin',   P6:'Farbod',  P1:'Shadman', bench:['Alan','Ali'] },
+    { P4:'Artin',   P3:'Ishu',    P2:'Haoyi',   P5:'Farbod',  P6:'Alan',    P1:'Eden',    bench:['Ali','Shadman'] },
+    { P4:'Farbod',  P3:'Artin',   P2:'Ishu',    P5:'Alan',    P6:'Eden',    P1:'Haoyi',   bench:['Ali','Shadman'] },
+    { P4:'Alan',    P3:'Farbod',  P2:'Artin',   P5:'Eden',    P6:'Ali',     P1:'Ishu',    bench:['Shadman','Haoyi'] },
+    { P4:'Eden',    P3:'Alan',    P2:'Farbod',  P5:'Ali',     P6:'Shadman', P1:'Artin',   bench:['Haoyi','Ishu'] },
+    { P4:'Ali',     P3:'Eden',    P2:'Alan',    P5:'Shadman', P6:'Haoyi',   P1:'Farbod',  bench:['Ishu','Artin'] },
+    { P4:'Shadman', P3:'Ali',     P2:'Eden',    P5:'Haoyi',   P6:'Ishu',    P1:'Alan',    bench:['Artin','Farbod'] },
+    { P4:'Haoyi',   P3:'Shadman', P2:'Ali',     P5:'Ishu',    P6:'Artin',   P1:'Eden',    bench:['Farbod','Alan'] },
   ];
 
-  const setters = new Set(['Ishu','Farbod','Eden']);
-  const setterPriority = ['Eden','Ishu','Farbod'];
+  const setters = new Set(['Ishu','Farbod','Ali']);
+  const setterPriority = ['Ishu','Farbod','Ali'];
 
   let idx = 0;
   const rotNum = document.getElementById('rotNum');
